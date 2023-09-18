@@ -7,6 +7,9 @@ app.set("view engine", 'jsx')
 const jsxViewEngine = require('jsx-view-engine')
 app.engine("jsx", jsxViewEngine())
 
+//Middleware
+app.use(express.urlencoded({extended: false}))
+
 //Index
 app.get("/logs", (req, res) => {
     res.send("Index")
@@ -22,6 +25,10 @@ app.get('/logs/new', (req, res) => {
 //Update
 
 //Create
+app.post('/logs', (req, res) => {
+    req.body.shipIsBroken = req.body.shipIsBroken === "on" 
+    res.send(req.body)
+})
 
 //Edit
 
