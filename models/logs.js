@@ -7,3 +7,7 @@ const logSchema = new mongoose.Schema({
 }, {
     timestamps: true
 })
+
+const Logs = mongoose.model('Logs', logSchema)
+
+module.exports = Logs
