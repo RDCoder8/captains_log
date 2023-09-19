@@ -72,6 +72,14 @@ app.post('/logs', async (req, res) => {
 //Edit
 
 //Show
+app.get('/logs/:id', async (req, res) => {
+    try {
+        const foundLog = await Logs.findById(req.params.id)
+        res.status(200).render("Show", {log : foundLog})
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
 
 //Catch all
 app.get('*', (req, res) => {
