@@ -64,13 +64,22 @@ app.delete('/logs/:id', async (req, res) => {
 })
 
 //Update
+app.put('/logs/:id', async (req, res) => {
+    try {
+        req.body.shipIsBroken = req.body.shipIsBroken === "on"
+        const updatedLog = await Logs.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        res.status(201).redirect("/logs")
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
 
 //Create
 app.post('/logs', async (req, res) => {
     try {
         req.body.shipIsBroken = req.body.shipIsBroken === "on"
         const createdLog = await Logs.create(req.body)
-        res.status(201).send(createdLog)
+        res.status(201).redirect("/logs")
     } catch (error) {
         res.status(400).send(error)
     }
@@ -81,7 +90,6 @@ app.post('/logs', async (req, res) => {
 app.get('/logs/:id/edit', async (req, res) => {
     try {
         const foundLog = await Logs.findById(req.params.id)
-        console.log(foundLog)
         res.status(200).render('Edit', {log : foundLog})
     } catch (error) {
         res.status(400).send(error)

@@ -10,11 +10,12 @@ export default function Index(props) {
         {logs.map((log, i) => {
           return (
             <li key={i}>
-              {log.title} <a href={`/logs/${log._id}`}>view log</a> <br />{" "}
-              <a href={`/logs/${log._id}/edit`}>Edit Log</a> <br />{" "}
+              {log.title} <a href={`/logs/${log._id}`}>View Log</a> {" "}
+              <a href={`/logs/${log._id}/edit`}>Edit Log</a> <br /> <br /> {" "}
               <form action={`/logs/${log._id}?_method=DELETE`} method="POST">
-                <input type="submit" value="DELETE" />
+                <input type="submit" value={`DELETE ${log.title.toUpperCase()}`} /> 
               </form>
+              <br />
             </li>
           );
         })}
