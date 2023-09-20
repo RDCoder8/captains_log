@@ -11,6 +11,7 @@ export default function Index(props) {
           return (
             <li key={i}>
               {log.title} <a href={`/logs/${log._id}`}>view log</a> <br />{" "}
+              <a href={`/logs/${log._id}/edit`}>Edit Log</a> <br />{" "}
               <form action={`/logs/${log._id}?_method=DELETE`} method="POST">
                 <input type="submit" value="DELETE" />
               </form>
